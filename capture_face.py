@@ -17,7 +17,7 @@ def recognize_person():
         faces = face_cascade.detectMultiScale(gray, 1.3, 5)
         for (x, y, w, h) in faces:
             cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
-            image = frame[y:y+h, x:x+w]
+            image = frame[max(0, y - 20): min(frame.shape[0], y+h + 20), max(0, x - 20):min(frame.shape[1], x+w + 20)]
             cv2.imwrite('face.png', image)
             gender = model_predict()
             face_detected = True
